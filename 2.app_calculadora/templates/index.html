@@ -1,0 +1,32 @@
+<!--index.html-->
+{% extends "base.html" %}
+
+{% block content %}
+        <h1>
+            <img src="{{url_for('static', filename='img/logo.png')}}" alt="Logo de tienda" width="64" height="64"> Calculadora
+        </h1>
+        <p>Ingresa datos numericos..</p>
+        <form action="/" method="POST">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="number" class="form-control" name="n1" placeholder="Ingrese el primer numero">
+                </div>  
+                <div class="col-md-6">
+                    <input type="number" class="form-control" name="n2" placeholder="Ingrese el segundo numero">
+                </div>   
+            </div> 
+            <div class="row py-3">
+                <div class="col-md-12">
+                    <button type="submt" class="btn btn-primary">calcular</button>
+                </div>
+            </div>
+         </form>
+    <div class="row py-2">
+        <div class="col">
+            <h3>La suma es: {{total_suma}}</h3>
+            <h3>La Resta es: {{total_resta}}</h3>
+            <h3>La Multiplicacion es: {{total_multiplicacion}}</h3>
+            <h3>La Division es: {{total_division}}</h3>
+        </div>
+    </div>
+{% endblock%}

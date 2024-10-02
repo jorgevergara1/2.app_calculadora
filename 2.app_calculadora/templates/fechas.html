@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+        <img src="{{ url_for('static', filename='img/fecha.png') }}" alt="Logo de Calculadora" width="50" height="50"> Calcular La Edad
+    </h1>
+    <p>Ingresa tu fecha de nacimiento...</p>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/fechas" method="POST">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="date" class="form-control" name="fecha_nacimiento" placeholder="Ingrese su fecha de nacimiento" required>  
+            </div>
+        </div>
+        <div class="row py-3">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Calcular Edad</button>
+            </div>
+        </div>
+    </form>
+
+    {% if edad is not none %}
+    <div class="row py-2">
+        <div class="col">
+            <h3>Tu edad es: {{ edad }} años</h3>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

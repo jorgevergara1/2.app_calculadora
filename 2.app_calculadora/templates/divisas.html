@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>
+        <img src="{{ url_for('static', filename='img/logo3.png')}}" alt="Logo de Conversor de Divisas" width="64" height="64"> Conversor de Divisas
+    </h1>
+    <p>Ingresa la cantidad y selecciona la divisa de destino...</p>
+    
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="number" step="any" name="cantidad" class="form-control" value="{{ cantidad if cantidad is not none else '' }}" min="0" placeholder="Ingrese la cantidad" required aria-label="Cantidad a convertir">
+            </div>
+            <div class="col-md-6">
+                <select name="divisa_destino" class="form-control" required aria-label="Divisa de destino">
+                    <option value="">Selecciona una divisa de destino</option>
+                    {% for key in tipos_de_cambio.keys() %}
+                        <option value="{{ key }}">{{ key }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row py-3">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary">Convertir</button>
+            </div>
+        </div>
+    </form>
+
+    {% if error_message %}
+        <div class="alert alert-danger mt-3">{{ error_message }}</div>
+    {% endif %}
+    
+    {% if resultado is not none %}
+    <div class="row py-2">
+        <div class="col">
+            <h3>Resultado de la Conversión:</h3>
+            <p>{{ cantidad }} COP es equivalente a {{ resultado }} {{ divisa_destino }}</p>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}
